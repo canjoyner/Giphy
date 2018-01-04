@@ -1,0 +1,23 @@
+.buttons{
+	padding: 20px;
+	margin:20px;
+
+}
+
+.hero {
+	margin:5px;
+	border-radius: 15px;
+	border-color: #000099;
+	background: #ccccff;
+}
+
+body{
+	/*wow this color is horrible */
+	background: #20c997;
+
+}
+
+.store {
+	margin:5px;
+	/*ideally there would be some max size of the imgages and videos */
+}
