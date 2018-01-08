@@ -2,11 +2,12 @@ var topics= ["apple", "pear","strawberry", "banana", "pineapple","grapes", "plum
 var topic ;
 var phrase;
 var queryURL;
+var still;
 
 
 function pickGiphy() {
 	var choice = $(this).attr("choiceName");
-	 queryURL = ["http://api.giphy.com/v1/gifs/search?q="+ phrase +"&api_key=dc6zaTOxFJmzC"];
+	 queryURL = ["http://api.giphy.com/v1/gifs/search?q="+ phrase +"&rating=pg&api_key=dc6zaTOxFJmzC"];
 
 	$.ajax({
 		url: queryURL,
@@ -19,12 +20,21 @@ function pickGiphy() {
 	for(var v = 0; v < 4; v++)
 
 {
-		
+		// look for me to undo 
 	var pick = response.data[v].images.original_still.url;
-	var pickvid = response.data[v].images.original.mp4;
+	var pickVid = response.data[v].images.downsized.url;
 	var rating = response.data[v].rating;
 	var pickSpot =$ ("<div class='store'>");
-	var image =$("<img>").attr("src",pick);
+	// var image =$("<img>").attr("src",pick, 
+	// 							"imageStill",pick,
+	// 							"imageAnimate",pickVid,
+	// 							"dataState", "still");
+
+	var image =$("<img>").attr("src",pickVid);
+		image.addClass(".display");
+		image.addClass(".dataState",still);
+		image.attr(".dataStill",pick);
+		image.attr(".dataAnimate",pickvid);
 			// when looking up video tags there needed to be a soure tag and a 
 			// video tag. I just couldn't get it to work
 	// var vid =$("<video>");
@@ -33,6 +43,7 @@ function pickGiphy() {
 	// pickSpot.append(vid);
 	pickSpot.append(image);
 	pickSpot.append(rating);
+	console.log(image)
 
 	$(".images").prepend(pickSpot);
 }
@@ -80,11 +91,15 @@ makeButtons();
 
 $(document).on("click", "#add-idea",pickGiphy);
 
+$(document).on("click", ".hero", clickable );
 
+$(document).on("click", ".store", swap );
 
 // this function works once to use the button to select what you would like to see
 // after the initial selection you have to type in key words to change the image
-$(".hero").on("click", function(){
+
+function clickable() {
+
 	console.log("toggle")
 	phrase = $(this).val();
 	console.log(this)
@@ -92,6 +107,17 @@ $(".hero").on("click", function(){
 
 	 pickGiphy();
 
-})
 
+}
 
+function swap(){
+	var state = $(this).attr("dataState");
+	console.log(state)
+	if (state === "still") {
+        $(this).attr("src", $(this).attr("dataAnimate"));
+        $(this).attr("dataState", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("dataStill"));
+        $(this).attr("dataState", "still");
+      }
+}
