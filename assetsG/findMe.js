@@ -7,7 +7,7 @@ var still;
 
 function pickGiphy() {
 	var choice = $(this).attr("choiceName");
-	 queryURL = ["http://api.giphy.com/v1/gifs/search?q="+ phrase +"&rating=pg&api_key=dc6zaTOxFJmzC"];
+	 queryURL = ["https://api.giphy.com/v1/gifs/search?q="+ phrase +"&rating=pg&api_key=dc6zaTOxFJmzC"];
 
 	$.ajax({
 		url: queryURL,
@@ -33,8 +33,8 @@ function pickGiphy() {
 	var image =$("<img>").attr("src",pickVid);
 		image.addClass(".display");
 		image.addClass(".dataState",still);
-		image.attr(".dataStill",pick);
-		image.attr(".dataAnimate",pickvid);
+		image.addClass(".dataStill",pick);
+		image.addClass(".dataAnimate",pickVid);
 			// when looking up video tags there needed to be a soure tag and a 
 			// video tag. I just couldn't get it to work
 	// var vid =$("<video>");
