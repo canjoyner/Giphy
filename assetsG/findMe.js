@@ -16,34 +16,27 @@ function pickGiphy() {
 	
 
 		$(".images").empty();
+		$("")
 		console.log("two")
-	for(var v = 0; v < 4; v++)
+	for(var v = 0; v < 10; v++)
 
 {
-		// look for me to undo 
-	var pick = response.data[v].images.original_still.url;
-	var pickVid = response.data[v].images.downsized.url;
+	var pick = response.data[v].images.fixed_height_small_still.url;
+	var pickVid = response.data[v].images.original.url;
 	var rating = response.data[v].rating;
 	var pickSpot =$ ("<div class='store'>");
-	// var image =$("<img>").attr("src",pick, 
-	// 							"imageStill",pick,
-	// 							"imageAnimate",pickVid,
-	// 							"dataState", "still");
 
-	var image =$("<img>").attr("src",pickVid);
-		image.addClass(".display");
-		image.addClass(".dataState",still);
-		image.addClass(".dataStill",pick);
-		image.addClass(".dataAnimate",pickVid);
-			// when looking up video tags there needed to be a soure tag and a 
-			// video tag. I just couldn't get it to work
-	// var vid =$("<video>");
-	// var vidSource = $("<source>").attr("src",pickvid)
+	var image =$("<img>").attr("src",pick);
+		image.addClass("display");
+		image.attr("data-state",still);
+		image.attr("data-still",pick);
+		image.attr("data-animate",pickVid);
+
 	var testPhrase =$("<p>").text(topic);
-	// pickSpot.append(vid);
+
 	pickSpot.append(image);
-	pickSpot.append(rating);
-	console.log(image)
+
+	// console.log(image)
 
 	$(".images").prepend(pickSpot);
 }
@@ -91,9 +84,9 @@ makeButtons();
 
 $(document).on("click", "#add-idea",pickGiphy);
 
-$(document).on("click", ".hero", clickable );
+$(document).on("click", ".hero", clickable);
 
-$(document).on("click", ".store", swap );
+$(document).on("click", ".display", swap);
 
 // this function works once to use the button to select what you would like to see
 // after the initial selection you have to type in key words to change the image
@@ -111,13 +104,13 @@ function clickable() {
 }
 
 function swap(){
-	var state = $(this).attr("dataState");
+	var state = $(this).attr("data-state");
 	console.log(state)
 	if (state === "still") {
-        $(this).attr("src", $(this).attr("dataAnimate"));
-        $(this).attr("dataState", "animate");
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
       } else {
-        $(this).attr("src", $(this).attr("dataStill"));
-        $(this).attr("dataState", "still");
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
       }
 }
