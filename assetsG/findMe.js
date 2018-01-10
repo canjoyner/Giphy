@@ -32,13 +32,19 @@ function pickGiphy() {
 		image.attr("data-still",pick);
 		image.attr("data-animate",pickVid);
 
+	var rate =$("<div class='rate'>");
+
+
 	var testPhrase =$("<p>").text(topic);
 
 	pickSpot.append(image);
+	// pickSpot.html("<li> rating</li>");
+	rate.prepend(rating);
 
 	// console.log(image)
 
 	$(".images").prepend(pickSpot);
+	$(".rate").prepend(rating)
 }
 
 
